@@ -9,7 +9,9 @@ import {
 const MainStack = createStackNavigator()
 const MainStackNavigator = () => {
     return(
-        <MainStack.Navigator>
+        <MainStack.Navigator screenOptions={{
+            headerShown:false,
+        }}>
             <MainStack.Screen name='home' component={HomeScreen}/>
         </MainStack.Navigator>
     )

@@ -4,11 +4,12 @@ import {
     FlatList,
     ActivityIndicator,
     Text,
+    StyleSheet,
 } from 'react-native'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 
-export default () => {
+export default (props) => {
     const {data, loading} = useQuery(SCOREBOARD)
 
     if (loading) return (
@@ -18,19 +19,40 @@ export default () => {
     )
 
     return(
-        <View>
+        <View {...props}>
+            <Text style={styles.title}>Scoreboard</Text>
             <FlatList
-                ListHeaderComponent={() => (
-                    <Text>Scoreboard</Text>
-                )}
                 data={data.scoreboard.edges}
                 renderItem={({item}) => (
-                    <Text>{item.nim + ' ' + item.name + ' ' + item.money}</Text>
+                    <RenderItem nim={item.nim} name={item.name} money={item.money}/>
                 )}
             />
         </View>
     )
 }
+
+const RenderItem = ({nim, name, money}) => {
+    return(
+        <View style={styles.itemContainer}>
+            <Text style={styles.name}>{nim + '  ' + name}</Text>
+            <Text style={styles.money}>{money}</Text>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    title:{
+        fontSize:20,
+        marginBottom:10,
+    },
+    name:{
+        width:200,
+    },
+    itemContainer:{
+        flexDirection:'row',
+        justifyContent:'space-between'
+    }
+})
 
 const SCOREBOARD = gql`
     {
