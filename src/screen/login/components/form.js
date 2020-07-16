@@ -32,16 +32,17 @@ export default () => {
             <TextInput 
                 style={styles.input}
                 placeholder='NIM' 
+                textContentType='telephoneNumber'
                 onChangeText={(text) => setNIM(text)}
             />
             <TextInput 
                 style={styles.input}
                 placeholder='Code' 
+                autoCapitalize='none'
                 onChangeText={(text) => setCode(text)}
             />
             <View style={styles.button}>
                 <Button
-                    style={styles.button} 
                     title='       Login       ' 
                     onPress={() => handleSignIn()}
                 />
@@ -58,7 +59,7 @@ const SIGN_IN = gql`
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        width:300,
         backgroundColor: '#fff',
     },
     input: {

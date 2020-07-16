@@ -2,12 +2,15 @@ import React from 'react'
 import {
     StyleSheet,
     View,
+    Image,
 } from 'react-native'
 import {Transfer, Scoreboard, Wallet} from './components'
+import logo from '../../../assets/logo.png'
 
 export default () => {
   return (
     <View style={styles.container}>
+      <Image source={logo} style={{height:200, width: 500}} resizeMode='contain'/>
       <Wallet style={styles.wallet}/>
       <Scoreboard style={styles.scoreboard}/>
       <Transfer style={styles.transfer}/>
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   wallet:{
-    width:300,
+    width:350,
     borderWidth:0.5,
     borderRadius:20,
     borderColor:'grey',
@@ -34,16 +37,19 @@ const styles = StyleSheet.create({
     paddingHorizontal:50,
   },
   scoreboard:{
-    width:300,
-    height:200,
+    width:350,
+    height:300,
+    alignItems:'center',
     borderWidth:0.5,
     borderRadius:20,
     borderColor:'grey',
-    padding:20,
+    paddingVertical:20,
+    paddingHorizontal:20,
     marginTop:20,
   },
   transfer:{
-    width:300,
+    width:350,
+    alignItems:'stretch',
     borderWidth:0.5,
     borderRadius:20,
     borderColor:'grey',

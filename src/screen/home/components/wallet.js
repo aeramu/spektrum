@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
         marginTop:10,
         borderRadius:10,
         overflow:'hidden'
+    },
+    text:{
+        fontSize:16,
     }
 })
 

@@ -21,20 +21,36 @@ export default (props) => {
     return(
         <View {...props}>
             <Text style={styles.title}>Scoreboard</Text>
+            <Text>Unlock Next Day!</Text>
+            <View style={styles.progressBar}>
+                <View style={{
+                    flex:data.scoreboard.sum, 
+                    height:20,
+                    backgroundColor:'#bbbbbb'
+                }}
+                />
+                <View style={{
+                    flex:data.scoreboard.target - data.scoreboard.sum, 
+                    height:20
+                }}
+                />
+                <Text style={{position:'absolute'}}>{data.scoreboard.sum}/{data.scoreboard.target}</Text>
+            </View>
+            <View style={styles.divider}/>
             <FlatList
                 data={data.scoreboard.edges}
-                renderItem={({item}) => (
-                    <RenderItem nim={item.nim} name={item.name} money={item.money}/>
+                renderItem={({item, index}) => (
+                    <RenderItem number={index+1} nim={item.nim} name={item.name} money={item.money}/>
                 )}
             />
         </View>
     )
 }
 
-const RenderItem = ({nim, name, money}) => {
+const RenderItem = ({number, nim, name, money}) => {
     return(
         <View style={styles.itemContainer}>
-            <Text style={styles.name}>{nim + '  ' + name}</Text>
+            <Text style={styles.name}>{number + '. ' + nim + '  ' + name}</Text>
             <Text style={styles.money}>{money}</Text>
         </View>
     )
@@ -43,14 +59,37 @@ const RenderItem = ({nim, name, money}) => {
 const styles = StyleSheet.create({
     title:{
         fontSize:20,
+        fontWeight:'bold',
         marginBottom:10,
     },
     name:{
-        width:200,
+        width:250,
+    },
+    money:{
+        fontWeight:'bold',
+    },
+    divider:{
+        height:1,
+        alignSelf:'stretch',
+        backgroundColor:'grey',
+        marginBottom:20,
     },
     itemContainer:{
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        marginBottom:10,
+    },
+    progressBar:{
+        alignSelf:'center',
+        justifyContent:'center',
+        flexDirection:'row',
+        width:250,
+        borderWidth:0.5,
+        borderRadius:10,
+        marginBottom:10,
+        overflow:'hidden',
+        borderColor:'grey',
+        marginTop:3,
     }
 })
 
@@ -63,6 +102,8 @@ const SCOREBOARD = gql`
                 name
                 money
             }
+            sum
+            target
         }
     }
 `

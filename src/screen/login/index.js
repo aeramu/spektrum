@@ -5,16 +5,16 @@ import {
     StyleSheet,
 } from 'react-native'
 import {Form} from './components'
+import logo from '../../../assets/logo.png'
 
 export default () => {
     return (
         <View style={styles.container}>
-            {/* <Image
-                style={{ width: 100, height: 100 }}
+            <Image
                 resizeMode='contain'
-                //style={styles.logo} 
-                source={require('./logo.png')}
-            /> */}
+                style={styles.logo} 
+                source={logo}
+            />
             <Form/>
         </View>
     )
@@ -22,12 +22,11 @@ export default () => {
 
 const styles = StyleSheet.create({
     logo: {
-      flex: 1,
-      width:100,
-      height:100,
+      width:500,
+      height:200,
     },
     container:{
         alignItems:'center',
-        paddingTop:200,
+        padding:20,
     }
 })
