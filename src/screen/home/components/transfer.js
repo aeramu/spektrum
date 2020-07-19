@@ -21,6 +21,8 @@ export default (props) => {
                 money: parseInt(money)
             }
         })
+        setNIM('')
+        setMoney('')
     }
 
     return(
@@ -29,11 +31,13 @@ export default (props) => {
             <TextInput 
                 style={styles.input}
                 placeholder='NIM' 
+                value={nim}
                 onChangeText={(text) => setNIM(text)}
             />
             <TextInput
                 style={styles.input}
-                placeholder='Amount' 
+                placeholder='Amount'
+                value={money} 
                 onChangeText={(text) => setMoney(text)}
             />
             <View style={styles.button}>
@@ -70,6 +74,7 @@ const TRANSFER = gql`
         transfer(receiverNIM: $nim, money: $money){
             id
             money
+            venture
         }
     }
 `

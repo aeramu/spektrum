@@ -6,11 +6,12 @@ import {
     Text,
     StyleSheet,
 } from 'react-native'
+import AccountList from './accountList'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 
 export default (props) => {
-    const {data, loading} = useQuery(SCOREBOARD)
+    const {data, loading, refetch} = useQuery(SCOREBOARD)
 
     if (loading) return (
         <View>
@@ -22,39 +23,29 @@ export default (props) => {
         <View {...props}>
             <Text style={styles.title}>Scoreboard</Text>
             <Text>Unlock Next Day!</Text>
-            <View style={styles.progressBar}>
-                <View style={{
-                    flex:data.scoreboard.sum, 
-                    height:20,
-                    backgroundColor:'#bbbbbb'
-                }}
-                />
-                <View style={{
-                    flex:data.scoreboard.target - data.scoreboard.sum, 
-                    height:20
-                }}
-                />
-                <Text style={{position:'absolute'}}>{data.scoreboard.sum}/{data.scoreboard.target}</Text>
-            </View>
+            <ProgressBar progress={data.scoreboard.sum} target={data.scoreboard.target}/>
             <View style={styles.divider}/>
-            <FlatList
-                data={data.scoreboard.edges}
-                renderItem={({item, index}) => (
-                    <RenderItem number={index+1} nim={item.nim} name={item.name} money={item.money}/>
-                )}
-            />
+            <AccountList data={data.scoreboard.edges}/>
         </View>
     )
 }
 
-const RenderItem = ({number, nim, name, money}) => {
-    return(
-        <View style={styles.itemContainer}>
-            <Text style={styles.name}>{number + '. ' + nim + '  ' + name}</Text>
-            <Text style={styles.money}>{money}</Text>
-        </View>
-    )
-}
+const ProgressBar = ({progress, target}) => (
+    <View style={styles.progressBar}>
+        <View style={{
+            flex: progress, 
+            height:20,
+            backgroundColor:'#bbbbbb'
+        }}
+        />
+        <View style={{
+            flex: target - progress, 
+            height:20
+        }}
+        />
+        <Text style={{position:'absolute'}}>{progress}/{target}</Text>
+    </View>
+)
 
 const styles = StyleSheet.create({
     title:{
@@ -62,22 +53,11 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         marginBottom:10,
     },
-    name:{
-        width:250,
-    },
-    money:{
-        fontWeight:'bold',
-    },
     divider:{
         height:1,
         alignSelf:'stretch',
         backgroundColor:'grey',
         marginBottom:20,
-    },
-    itemContainer:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        marginBottom:10,
     },
     progressBar:{
         alignSelf:'center',
@@ -101,6 +81,7 @@ const SCOREBOARD = gql`
                 nim
                 name
                 money
+                venture
             }
             sum
             target

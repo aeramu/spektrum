@@ -4,7 +4,7 @@ import {
     View,
     Image,
 } from 'react-native'
-import {Transfer, Scoreboard, Wallet} from './components'
+import {Transfer, Scoreboard, Wallet, TransactionHistory} from './components'
 import logo from '../../../assets/logo.png'
 
 export default () => {
@@ -12,8 +12,9 @@ export default () => {
     <View style={styles.container}>
       <Image source={logo} style={{height:200, width: 500}} resizeMode='contain'/>
       <Wallet style={styles.wallet}/>
-      <Scoreboard style={styles.scoreboard}/>
       <Transfer style={styles.transfer}/>
+      <Scoreboard style={styles.scoreboard}/>
+      <TransactionHistory style={styles.scoreboard}/>
     </View>
   )
 }
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   },
   scoreboard:{
     width:350,
-    height:300,
+    height:500,
     alignItems:'center',
     borderWidth:0.5,
     borderRadius:20,
