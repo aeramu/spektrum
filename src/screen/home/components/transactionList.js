@@ -11,7 +11,7 @@ export default ({data}) => {
         <FlatList
             data={data}
             renderItem={({item}) => {
-                const type = item.item? "buy" : "transfer to"
+                const type = item.item? "Buy" : "Transfer to"
                 const target = item.item? item.item : item.destination
                 return(
                     <RenderItem source={item.source} type={type} target={target} amount={item.amount}/> 

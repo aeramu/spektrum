@@ -4,7 +4,7 @@ import {
     View,
     Image,
 } from 'react-native'
-import {Transfer, Scoreboard, Wallet, TransactionHistory} from './components'
+import {Transfer, Scoreboard, Wallet, TransactionHistory, ItemMenu} from './components'
 import logo from '../../../assets/logo.png'
 
 export default () => {
@@ -15,6 +15,7 @@ export default () => {
       <Transfer style={styles.transfer}/>
       <Scoreboard style={styles.scoreboard}/>
       <TransactionHistory style={styles.scoreboard}/>
+      <ItemMenu style={styles.scoreboard}/>
     </View>
   )
 }
