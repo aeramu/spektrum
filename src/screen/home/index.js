@@ -14,8 +14,8 @@ export default () => {
       <Wallet style={styles.wallet}/>
       <Transfer style={styles.transfer}/>
       <Scoreboard style={styles.scoreboard}/>
-      <TransactionHistory style={styles.scoreboard}/>
       <ItemMenu style={styles.scoreboard}/>
+      <TransactionHistory style={styles.scoreboard}/>
     </View>
   )
 }

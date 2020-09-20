@@ -23,6 +23,10 @@ export default (props) => {
             <ActivityIndicator/>
         </View>
     )
+    
+    if (!data.myAccount) {
+        handleSignOut()
+    }
 
     return(
         <View {...props}>

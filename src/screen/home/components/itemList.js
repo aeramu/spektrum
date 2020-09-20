@@ -41,8 +41,14 @@ export default ({data}) => {
 const RenderItem = ({name, description, price, onPress}) => {
     return(
         <View style={styles.itemContainer}>
-            <Text>{name + ' ' + description + ' Rp.' + price}</Text>
-            <Button title='Buy' onPress={() => onPress()}/>
+            <Text style={styles.name}>{name}</Text> 
+            <Text style={styles.description}>{description}</Text>
+            <View style={styles.buy}>
+                <Text>{'Rp. ' + price}</Text>
+                <View style={styles.button}>
+                    <Button title='  Buy  ' onPress={() => onPress()}/>
+                </View>
+            </View>
         </View>
     )
 }
@@ -58,7 +64,31 @@ const BUY = gql`
 
 const styles = StyleSheet.create({
     itemContainer:{
-        flexDirection:'row',
         marginBottom:10,
+        alignItems:'flex-start',
+        borderWidth:0.5,
+        borderRadius:20,
+        borderColor:'grey',
+        paddingVertical:10,
+        paddingHorizontal:10,
     },
+    name:{
+        fontWeight:'bold',
+        fontSize:16
+    },
+    description:{
+        fontSize:13,
+    },
+    buy:{
+        width:270,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between',
+        //backgroundColor:'red'
+    },
+    button:{
+        marginTop:10,
+        borderRadius:10,
+        overflow:'hidden',
+    }
 })
